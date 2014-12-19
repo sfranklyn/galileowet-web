@@ -1,0 +1,89 @@
+/* 
+    Document   : style
+    Created on : Aug 10, 2009, 9:18:35 AM
+    Author     : Samuel Franklyn
+*/
+
+body {
+    font-family: "Georgia", serif;
+}
+
+h1 {
+    font-size: medium;
+}
+
+#header {
+    background: url('images/galileo_logo.gif') top left no-repeat;
+    color: white;
+    background-color:#2b5580;
+    font-family: "Lucida Sans", sans-serif;
+    height:139px;
+    border-top: 3px solid #88c540;
+    border-bottom: 3px solid #88c540;
+}
+
+#header h1 {
+    margin-left:175px;
+    padding-top:35px;
+    font-style:italic;
+}
+
+#content {
+    padding-top:1px;
+    padding-bottom:1px;
+    border-left: 3px solid #88c540;
+    border-right: 3px solid #88c540;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+#member_login {
+    font-size: large;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+#footer {
+    padding-top:1em;
+    padding-bottom:1em;
+    font-size: small;
+    text-align: center;
+    color: white;
+    background-color:#2b5580;
+    border-top: 3px solid #88c540;
+    border-bottom: 3px solid #88c540;
+}
+
+#footer a:link { color: white; }
+#footer a:visited { color: red; }
+
+/* ##### Data Table ##### */
+.dataTable {
+    border-collapse: collapse;
+    table-layout : auto ;
+    width: 100%;
+}
+
+.dataTableHeader {
+    background-color: #EFEBDE;
+    border: 1px solid #696969;
+    padding: 0px 5px 0px 5px
+}
+
+.dataTableColumn {
+    border: 1px solid #696969;
+    padding: 0px 5px 0px 5px;
+    text-align: left;
+    vertical-align: top;
+}
+
+/* ##### Paginator ##### */
+
+.paginator {
+    width: 100%;
+}
+
+.paginator td {
+    border: 1px solid #696969;
+    padding: 0px 5px 0px 5px;
+}

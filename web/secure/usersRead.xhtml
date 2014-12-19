@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Galileo Web Terminal</title>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+                <h1>#{msgs.read} #{msgs.user}</h1>
+                <form id="users" jsfc="h:form">
+                    <h:commandLink id="users"
+                                   action="redirect:secure/users"
+                                   value="#{msgs.users_maintenance}"/>
+                </form><br/>
+                <table>
+                    <tr>
+                        <td>#{msgs.user_name}</td>
+                        <td>:#{users.users.userName}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_hcm}</td>
+                        <td>:#{users.users.userHcm}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_pcc}</td>
+                        <td>:#{users.users.pccId.pccPcc}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_fname}</td>
+                        <td>:#{users.users.userFname}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_lname}</td>
+                        <td>:#{users.users.userLname}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_company_name}</td>
+                        <td>:#{users.users.userCompanyName}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_address}</td>
+                        <td>:#{users.users.userAddress1}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>:#{users.users.userAddress2}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_city}</td>
+                        <td>:#{users.users.userCity}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_state}</td>
+                        <td>:#{users.users.userState}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_zip}</td>
+                        <td>:#{users.users.userZip}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_country}</td>
+                        <td>:#{users.users.userCountry}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_phone}</td>
+                        <td>:#{users.users.userPhone}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_fax}</td>
+                        <td>:#{users.users.userFax}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_mobile}</td>
+                        <td>:#{users.users.userMobile}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_pager}</td>
+                        <td>:#{users.users.userPager}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_email}</td>
+                        <td>:#{users.users.userEmail}</td>
+                    </tr>
+                </table>
+                <br/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

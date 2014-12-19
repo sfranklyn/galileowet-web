@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      lang="#{visit.locale}"
+      >
+    <head>
+        <title>#{msgs.title}</title>
+        <base href="#{app.baseURL}" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="../style.css" />
+    </head>
+    <body onload="#{visit.focusScript}">
+        <div id="header">
+            <h1>#{msgs.title}</h1>
+        </div>
+        <div id="content">
+            <c:if test="#{visit.users!=null}">
+                <form jsfc="h:form" id="dropDownMenu">
+                    <rich:toolBar>
+                        <c:forEach items="#{visit.menuList}" var="menu">
+                            <ui:include src="secure/#{menu}"/>
+                        </c:forEach>
+                    </rich:toolBar>
+                </form>
+            </c:if>
+            <ui:insert name="body">Default Body</ui:insert>
+            <a href="index.xhtml"></a>
+        </div>
+        <div id="footer">
+            <form jsfc="h:form" id="chooseLanguage">
+                #{msgs.language} : &#160; &#160;
+                <input jsfc="h:commandButton" id="english" value="English"
+                       type="image" image="../images/en_US.gif" action="#{visit.chooseEnglish}" >
+                </input>
+                English &#160; &#160;
+                <input jsfc="h:commandButton" id="indonesia" value="Indonesia"
+                       type="image" image="../images/in_ID.gif" action="#{visit.chooseIndonesia}" >
+                </input>
+                Indonesia
+            </form><br/>
+            Design by <a href="http://www.galileoindonesia.com">Galileo Indonesia</a> | Copyright 2009 <a href="http://www.galileoindonesia.com">Galileo Indonesia</a>
+        </div>
+    </body>
+</html>

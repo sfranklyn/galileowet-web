@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Galileo Web Terminal</title>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+                <h1>#{msgs.users_roles_maintenance}</h1>
+                <form id="crud" jsfc="h:form">
+                    <h:commandLink id="create"
+                                   action="#{usersRoles.create}"
+                                   value="#{msgs.create}"/>
+                    <br/><br/>
+                    <rich:dataTable id="data_table"
+                                    value="#{usersRoles.dataModel}"
+                                    rows="#{usersRoles.noOfRows}"
+                                    var="userRole"
+                                    styleClass="dataTable"
+                                    headerClass="dataTableHeader"
+                                    columnClasses="dataTableColumn"
+                                    >
+                        <h:column id="role_name">
+                            <f:facet name="header">
+                                #{msgs.role_name}
+                            </f:facet>
+                            #{userRole.roles.roleName}
+                        </h:column>
+                        <h:column id="user_name">
+                            <f:facet name="header">
+                                #{msgs.user_name}
+                            </f:facet>
+                            #{userRole.users.userName}
+                        </h:column>
+                        <h:column id="action">
+                            <f:facet name="header">
+                                #{msgs.action}
+                            </f:facet>
+                            <h:commandLink id="readLink"
+                                           action="#{usersRoles.read}"
+                                           value="#{msgs.read}"/>&#160;
+                            <h:commandLink id="deleteLink"
+                                           action="#{usersRoles.delete}"
+                                           value="#{msgs.delete}"/>
+                        </h:column>
+                        <f:facet name="footer">
+                            <rich:datascroller id="scroll"
+                                               for="data_table"
+                                               fastStep="#{usersRoles.fastStep}"
+                                               tableStyleClass="paginator">
+                                <f:facet name="previous">
+                                    &lt;
+                                </f:facet>
+                                <f:facet name="next">
+                                    >
+                                </f:facet>
+                            </rich:datascroller>
+                        </f:facet>
+                    </rich:dataTable>
+                </form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

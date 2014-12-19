@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Galileo Web Terminal</title>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+                <h1>#{msgs.pcc_maintenance}</h1>
+                <p>
+                    <form id="crud" jsfc="h:form">
+                        #{msgs.pcc_pcc} :&#160;
+                        <input jsfc="h:inputText" id="pccs_pcc"
+                               size="10" maxlength="6"
+                               value="#{pccs.pcc}"/>&#160;
+                        <input id="findByPcc" jsfc="h:commandButton"
+                               type="submit" value="#{msgs.find}"
+                               action="#{pccs.findByPcc}" /><br/><br/>
+                        <h:commandLink id="create"
+                                       action="#{pccs.create}"
+                                       value="#{msgs.create}"/>
+                        <br/><br/>
+                        <rich:dataTable id="data_table"
+                                        value="#{pccs.dataModel}"
+                                        rows="#{pccs.noOfRows}"
+                                        var="pcc"
+                                        styleClass="dataTable"
+                                        headerClass="dataTableHeader"
+                                        columnClasses="dataTableColumn"
+                                        >
+                            <h:column id="pccId">
+                                <f:facet name="header">
+                                    #{msgs.pcc_id}
+                                </f:facet>
+                                #{pcc.pccId}
+                            </h:column>
+                            <h:column id="pccPcc">
+                                <f:facet name="header">
+                                    #{msgs.pcc_pcc}
+                                </f:facet>
+                                #{pcc.pccPcc}
+                            </h:column>
+                            <h:column id="pccDesc">
+                                <f:facet name="header">
+                                    #{msgs.pcc_desc}
+                                </f:facet>
+                                #{pcc.pccDesc}
+                            </h:column>
+                            <h:column id="action">
+                                <f:facet name="header">
+                                    #{msgs.action}
+                                </f:facet>
+                                <h:commandLink id="readLink"
+                                               action="#{pccs.read}"
+                                               value="#{msgs.read}"/>&#160;
+                                <h:commandLink id="updateLink"
+                                               action="#{pccs.update}"
+                                               value="#{msgs.update}"/>&#160;
+                                <h:commandLink id="deleteLink"
+                                               action="#{pccs.delete}"
+                                               value="#{msgs.delete}"/>
+                            </h:column>
+                            <f:facet name="footer">
+                                <rich:datascroller id="scroll"
+                                                   for="data_table"
+                                                   fastStep="#{pccs.fastStep}"
+                                                   tableStyleClass="paginator">
+                                    <f:facet name="previous">
+                                        &lt;
+                                    </f:facet>
+                                    <f:facet name="next">
+                                        >
+                                    </f:facet>
+                                </rich:datascroller>
+                            </f:facet>
+                        </rich:dataTable><br/><br/>
+                    </form>
+                </p><br/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Galileo Web Terminal</title>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+                <h1>#{msgs.delete} #{msgs.user} #{msgs.role}</h1>
+                <form id="users_roles" jsfc="h:form">
+                    <h:commandLink id="users_roles"
+                                   action="redirect:secure/users_roles" value="#{msgs.users_roles_maintenance}"/>
+                </form><br/>
+                <form id="users_rolesDelete" jsfc="h:form">
+                    <table>
+                        <tr>
+                            <td>#{msgs.user_name}</td>
+                            <td>:#{usersRoles.usersRoles.users.userName}</td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.role_name}</td>
+                            <td>:#{usersRoles.usersRoles.roles.roleName}</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input id="submit" jsfc="h:commandButton"
+                                       type="submit" value="#{msgs.delete}"
+                                       action="#{usersRoles.saveDelete}" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <h:messages globalOnly="true" style="color:red;"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

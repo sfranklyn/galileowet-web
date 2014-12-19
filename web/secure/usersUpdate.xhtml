@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Galileo Web Terminal</title>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+                <h1>#{msgs.update} #{msgs.user}</h1>
+                <form id="users" jsfc="h:form">
+                    <h:commandLink id="users"
+                                   action="redirect:secure/users"
+                                   value="#{msgs.users_maintenance}"/>
+                </form><br/>
+                <form id="usersUpdate" jsfc="h:form">
+                    <table>
+                        <tr>
+                            <td>#{msgs.user_name}</td>
+                            <td>:#{users.users.userName}</td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_hcm}</td>
+                            <td>:<input jsfc="h:inputText" id="user_hcm"
+                                        size="50" maxlength="50"
+                                        value="#{users.users.userHcm}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_pcc}</td>
+                            <td>:<input jsfc="h:inputText" id="user_pcc"
+                                        size="5" maxlength="5"
+                                        value="#{users.users.pccId.pccPcc}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_fname}</td>
+                            <td>:<input jsfc="h:inputText" id="user_fname"
+                                        size="50" maxlength="100"
+                                        value="#{users.users.userFname}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_lname}</td>
+                            <td>:<input jsfc="h:inputText" id="user_lname"
+                                        size="50" maxlength="100"
+                                        value="#{users.users.userLname}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_company_name}</td>
+                            <td>:<input jsfc="h:inputText" id="user_company_name"
+                                        size="30" maxlength="50"
+                                        value="#{users.users.userCompanyName}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_address}</td>
+                            <td>:<input jsfc="h:inputText" id="user_address1"
+                                        size="30" maxlength="50"
+                                        value="#{users.users.userAddress1}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>:<input jsfc="h:inputText" id="user_address2"
+                                        size="30" maxlength="100"
+                                        value="#{users.users.userAddress2}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_city}</td>
+                            <td>:<input jsfc="h:inputText" id="user_city"
+                                        size="20" maxlength="30"
+                                        value="#{users.users.userCity}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_state}</td>
+                            <td>:<input jsfc="h:inputText" id="user_state"
+                                        size="20" maxlength="30"
+                                        value="#{users.users.userState}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_zip}</td>
+                            <td>:<input jsfc="h:inputText" id="user_zip"
+                                        size="10" maxlength="10"
+                                        value="#{users.users.userZip}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_country}</td>
+                            <td>:<input jsfc="h:inputText" id="user_country"
+                                        size="2" maxlength="2"
+                                        value="#{users.users.userCountry}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_phone}</td>
+                            <td>:<input jsfc="h:inputText" id="user_phone"
+                                        size="20" maxlength="30"
+                                        value="#{users.users.userPhone}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_fax}</td>
+                            <td>:<input jsfc="h:inputText" id="user_fax"
+                                        size="20" maxlength="30"
+                                        value="#{users.users.userFax}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_mobile}</td>
+                            <td>:<input jsfc="h:inputText" id="user_mobile"
+                                        size="15" maxlength="15"
+                                        value="#{users.users.userMobile}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_pager}</td>
+                            <td>:<input jsfc="h:inputText" id="user_pager"
+                                        size="15" maxlength="15"
+                                        value="#{users.users.userPager}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.user_email}</td>
+                            <td>:<input jsfc="h:inputText" id="user_email"
+                                        size="50" maxlength="200"
+                                        value="#{users.users.userEmail}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input id="submit" jsfc="h:commandButton"
+                                       type="submit" value="#{msgs.update}"
+                                       action="#{users.saveUpdate}" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <h:messages globalOnly="true" style="color:red;"/>
+                <br/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Galileo Web Terminal</title>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <ui:composition>
+            <rich:dropDownMenu value="#{msgs.administrators}">
+                <rich:menuItem value="#{msgs.pcc_maintenance}" action="redirect:secure/pccs"/>
+                <rich:menuItem value="#{msgs.users_maintenance}" action="redirect:secure/users"/>
+                <rich:menuItem value="#{msgs.roles_maintenance}" action="redirect:secure/roles"/>
+                <rich:menuItem value="#{msgs.users_roles_maintenance}" action="redirect:secure/users_roles"/>
+                <rich:menuItem value="#{msgs.urls_roles_maintenance}" action="redirect:secure/urls_roles"/>
+                <rich:menuItem value="#{msgs.configs_maintenance}" action="redirect:secure/configs"/>
+            </rich:dropDownMenu>
+        </ui:composition>
+    </body>
+</html>

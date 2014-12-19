@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Galileo Web Terminal</title>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+                <h1>#{msgs.create} #{msgs.config}</h1>
+                <form id="configs" jsfc="h:form">
+                    <h:commandLink id="configs"
+                                   action="redirect:secure/configs" value="#{msgs.configs_maintenance}"/>
+                </form><br/>
+                <form id="configsCreate" jsfc="h:form">
+                    <table>
+                        <tr>
+                            <td>#{msgs.config_key}</td>
+                            <td>:<input jsfc="h:inputText" id="config_key"
+                                        size="50" maxlength="30"
+                                        value="#{configs.configs.configKey}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.config_desc}</td>
+                            <td>:<input jsfc="h:inputText" id="config_desc"
+                                        size="50" maxlength="100"
+                                        value="#{configs.configs.configDesc}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.config_type}</td>
+                            <td>:<input jsfc="h:inputText" id="config_type"
+                                        size="50" maxlength="100"
+                                        value="#{configs.configs.configType}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.config_value}</td>
+                            <td>:<input jsfc="h:inputText" id="config_value"
+                                        size="50" maxlength="100"
+                                        value="#{configs.configs.configValue}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input id="submit" jsfc="h:commandButton"
+                                       type="submit" value="#{msgs.create}"
+                                       action="#{configs.saveCreate}" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <h:messages globalOnly="true" style="color:red;"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

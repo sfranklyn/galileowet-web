@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Galileo Web Terminal</title>
+        <meta name="description" content="Galileo Web Terminal" />
+        <meta name="keywords" content="galileo,indonesia,web,terminal" />
+        <meta name="author" content="Samuel Franklyn" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+                <h1>#{msgs.create} #{msgs.pcc_pcc}</h1>
+                <form id="pccs" jsfc="h:form">
+                    <h:commandLink id="pccs"
+                                   action="redirect:secure/pccs" value="#{msgs.pcc_maintenance}"/>
+                    <br/><br/>
+                    <table>
+                        <tr>
+                            <td>#{msgs.pcc_pcc}</td>
+                            <td>:#{pccs.pccs.pccPcc}</td>
+                        </tr>
+                        <tr>
+                            <td>#{msgs.pcc_desc}</td>
+                            <td>:<input jsfc="h:inputText" id="pcc_desc"
+                                        size="80" maxlength="200"
+                                        value="#{pccs.pccs.pccDesc}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input id="submit" jsfc="h:commandButton"
+                                       type="submit" value="#{msgs.update}"
+                                       action="#{pccs.saveUpdate}" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <h:messages globalOnly="true" style="color:red;"/>
+                <br/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
