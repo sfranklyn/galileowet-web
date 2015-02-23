@@ -76,6 +76,12 @@
                                 </f:facet>
                                 #{user.userCompanyName}
                             </h:column>
+                            <h:column id="user_last_login">
+                                <f:facet name="header">
+                                    #{msgs.user_last_login}
+                                </f:facet>
+                                #{user.userLastLogin}
+                            </h:column>
                             <h:column id="action">
                                 <f:facet name="header">
                                     #{msgs.action}

@@ -25,7 +25,7 @@ public class SessionServletListener implements HttpSessionListener {
 
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession httpSession = se.getSession();
-        log.info("GWET0001:Session count=" + sessionCount.incrementAndGet() + " " + httpSession.getId());
+        log.log(Level.INFO, "GWET0001:Session count={0} {1}", new Object[]{sessionCount.incrementAndGet(), httpSession.getId()});
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {
@@ -37,23 +37,23 @@ public class SessionServletListener implements HttpSessionListener {
                 XmlSelect xs = visit.getXs();
                 if (xs != null) {
                     String req = "I";
-                    log.info("GWET0001:" + req);
+                    log.log(Level.INFO, "GWET0001:{0}", req);
                     String resp = xs.terminalSubmit(req, visit.getSutaKey());
-                    log.info("GWET0001:" + resp);
+                    log.log(Level.INFO, "GWET0001:{0}", resp);
                     req = "SOF";
-                    log.info("GWET0001:" + req);
+                    log.log(Level.INFO, "GWET0001:{0}", req);
                     resp = xs.terminalSubmit(req, visit.getSutaKey());
-                    log.info("GWET0001:" + resp);
+                    log.log(Level.INFO, "GWET0001:{0}", resp);
                     xs.endSession(Integer.MIN_VALUE + 1, visit.getSutaKey());
                     xs.destroySuta(visit.getSutaKey());
                     log.info("GWET0001:SUTA destroyed");
                 }
             } catch (Exception ex) {
-                Logger.getLogger(SessionServletListener.class.getName()).log(Level.SEVERE, "GWET0001:" + ex.toString(), ex);
+                log.log(Level.SEVERE, "GWET0001:" + ex.toString(), ex);
             }
         }
         if (sessionCount.get() > 0) {
-            log.info("GWET0001:Session count=" + sessionCount.decrementAndGet() + " " + httpSession.getId());
+            log.log(Level.INFO, "GWET0001:Session count={0} {1}", new Object[]{sessionCount.decrementAndGet(), httpSession.getId()});
         }
     }
 }
