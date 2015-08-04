@@ -2,13 +2,13 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="secure/users.xhtml" x="150" y="300" zoom="true"/>
         <Node id="secure/terminal.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="secure/users.xhtml" x="150" y="300" zoom="true"/>
         <Node id="template.xhtml" x="400" y="150" zoom="true"/>
         <Node id="secure/urls_rolesRead.xhtml" x="1900" y="150" zoom="true"/>
         <Node id="secure/pccsRead.xhtml" x="900" y="600" zoom="true"/>
-        <Node id="secure/rolesRead.xhtml" x="900" y="450" zoom="true"/>
         <Node id="secure/signon.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="secure/rolesRead.xhtml" x="900" y="450" zoom="true"/>
         <Node id="secure/user.xhtml" x="900" y="150" zoom="true"/>
         <Node id="secure/rolesCreate.xhtml" x="400" y="1050" zoom="true"/>
         <Node id="secure/usersRead.xhtml" x="150" y="1200" zoom="true"/>
@@ -30,16 +30,16 @@
         <Node id="secure/configsUpdate.xhtml" x="150" y="1050" zoom="true"/>
         <Node id="secure/configs.xhtml" x="400" y="300" zoom="true"/>
         <Node id="index.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="secure/usersUpdate.xhtml" x="650" y="600" zoom="true"/>
         <Node id="secure/roles.xhtml" x="650" y="150" zoom="true"/>
         <Node id="secure/users_rolesCreate.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="secure/usersUpdate.xhtml" x="650" y="600" zoom="true"/>
         <Node id="secure/configsDelete.xhtml" x="150" y="900" zoom="true"/>
         <Node id="secure/pccsDelete.xhtml" x="1400" y="300" zoom="true"/>
         <Node id="secure/adm.xhtml" x="150" y="600" zoom="true"/>
         <Node id="secure/change_password.xhtml" x="400" y="450" zoom="true"/>
         <Node id="secure/urls_rolesCreate.xhtml" x="650" y="750" zoom="true"/>
-        <Node id="secure/urls_rolesDelete.xhtml" x="1150" y="600" zoom="true"/>
         <Node id="secure/pccsUpdate.xhtml" x="650" y="900" zoom="true"/>
+        <Node id="secure/urls_rolesDelete.xhtml" x="1150" y="600" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
