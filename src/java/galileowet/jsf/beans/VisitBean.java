@@ -132,7 +132,7 @@ public class VisitBean {
         ExecutorService es = Executors.newSingleThreadExecutor();
         try {
             this.terminalText = "";
-            this.terminalText = es.submit(execTermCommand).get(30, TimeUnit.SECONDS);
+            this.terminalText = es.submit(execTermCommand).get(60, TimeUnit.SECONDS);
         } catch (Exception ex) {
             Logger.getLogger(VisitBean.class.getName()).log(Level.SEVERE, "GWET0001:" + ex.getMessage(), ex);
             this.terminalText = ex.getMessage();

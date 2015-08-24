@@ -34,6 +34,7 @@ create table users (
     user_mobile varchar(15),
     user_pager varchar(15),
     user_email varchar(200),
+    user_last_login timestamp,
     user_version int not null default 0,
     constraint primary key (user_id),
     constraint nk_users unique (user_name),
