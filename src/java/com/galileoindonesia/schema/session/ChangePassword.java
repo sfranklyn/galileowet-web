@@ -46,7 +46,7 @@ public class ChangePassword {
     @XmlElement(name = "NewPwd", required = true)
     protected String newPwd;
     @XmlElement(name = "NewKeyword", required = true)
-    protected NewKeyword newKeyword;
+    protected String newKeyword;
 
     /**
      * Gets the value of the newPwd property.
@@ -80,7 +80,7 @@ public class ChangePassword {
      *     {@link NewKeyword }
      *     
      */
-    public NewKeyword getNewKeyword() {
+    public String getNewKeyword() {
         return newKeyword;
     }
 
@@ -92,7 +92,7 @@ public class ChangePassword {
      *     {@link NewKeyword }
      *     
      */
-    public void setNewKeyword(NewKeyword value) {
+    public void setNewKeyword(String value) {
         this.newKeyword = value;
     }
 

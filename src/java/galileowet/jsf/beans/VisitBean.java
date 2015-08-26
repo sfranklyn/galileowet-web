@@ -13,9 +13,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -133,7 +135,7 @@ public class VisitBean {
         try {
             this.terminalText = "";
             this.terminalText = es.submit(execTermCommand).get(60, TimeUnit.SECONDS);
-        } catch (Exception ex) {
+        } catch (InterruptedException | ExecutionException | TimeoutException ex) {
             Logger.getLogger(VisitBean.class.getName()).log(Level.SEVERE, "GWET0001:" + ex.getMessage(), ex);
             this.terminalText = ex.getMessage();
         }
@@ -151,7 +153,7 @@ public class VisitBean {
 
         // After an end transaction, put BF to a configured queue for that PCC
         if (!queueNbr.isEmpty()) {
-            if (terminalCommand.equals("E")||terminalCommand.equals("ER")||terminalCommand.equals("ET")) {
+            if (terminalCommand.equals("E") || terminalCommand.equals("ER") || terminalCommand.equals("ET")) {
                 if (this.terminalText.startsWith("EOK") || this.terminalText.startsWith("OK")) {
                     String response = this.terminalText;
                     String recloc = getRecLoc(response);
@@ -173,22 +175,28 @@ public class VisitBean {
     }
 
     private boolean isRestrictedCommand(String cmd) {
-        if (restrictedCmds == null)
+        if (restrictedCmds == null) {
             return false;
+        }
         Iterator it = restrictedCmds.iterator();
         while (it.hasNext()) {
-            String s = (String)it.next();
-            if (cmd.startsWith(s.trim().toUpperCase()))
+            String s = (String) it.next();
+            if (cmd.startsWith(s.trim().toUpperCase())) {
                 return true;
+            }
         }
         return false;
     }
 
     public String execute() {
-        if(terminalCommand.startsWith("STD")) {
+        if (terminalCommand.startsWith("STD")) {
+            terminalCommand = "";
             return "redirect:secure/change_signon_password";
-        } 
+        }
         execTerminalCommand();
+        if (this.terminalText.contains("]STD")) {
+            return "redirect:secure/change_signon_password";
+        }
         return null;
     }
 
