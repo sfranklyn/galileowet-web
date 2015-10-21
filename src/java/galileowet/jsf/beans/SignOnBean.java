@@ -6,7 +6,6 @@
 package galileowet.jsf.beans;
 
 import com.galileoindonesia.schema.session.ChangePassword;
-import com.galileoindonesia.schema.session.NewKeyword;
 import com.galileoindonesia.schema.session.SessionChangePassword10;
 import com.galileoindonesia.schema.session.SessionMods;
 import com.google.inject.Inject;
@@ -54,7 +53,7 @@ public class SignOnBean {
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    ex.getMessage(), ""));
+                            ex.getMessage(), ""));
             Logger.getLogger(LogInBean.class.getName()).log(Level.SEVERE, "GWET0001:" + ex.toString(), ex);
             if (xmlSelect != null) {
                 xmlSelect.endSession(Integer.MIN_VALUE + 1, visit.getSutaKey());
@@ -68,7 +67,7 @@ public class SignOnBean {
         if (signOn.equals("")) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    messageSource.getString("signon_required"), ""));
+                            messageSource.getString("signon_required"), ""));
             signOn = " ";
             xmlSelect.endSession(Integer.MIN_VALUE + 1, visit.getSutaKey());
             xmlSelect.destroySuta(visit.getSutaKey());
@@ -79,7 +78,7 @@ public class SignOnBean {
         if (password.equals("")) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    messageSource.getString("password_required"), ""));
+                            messageSource.getString("password_required"), ""));
             xmlSelect.endSession(Integer.MIN_VALUE + 1, visit.getSutaKey());
             xmlSelect.destroySuta(visit.getSutaKey());
             visit.setXs(null);
@@ -90,7 +89,7 @@ public class SignOnBean {
         if (visit.getTerminalText().contains(ERR)) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    visit.getTerminalText(), ""));
+                            visit.getTerminalText(), ""));
             xmlSelect.endSession(Integer.MIN_VALUE + 1, visit.getSutaKey());
             xmlSelect.destroySuta(visit.getSutaKey());
             visit.setXs(null);
@@ -101,7 +100,7 @@ public class SignOnBean {
         if (visit.getTerminalText().contains(ERR)) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    visit.getTerminalText(), ""));
+                            visit.getTerminalText(), ""));
             xmlSelect.endSession(Integer.MIN_VALUE + 1, visit.getSutaKey());
             xmlSelect.destroySuta(visit.getSutaKey());
             visit.setXs(null);
@@ -119,19 +118,19 @@ public class SignOnBean {
             if (userPassword1.equals("")) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        messageSource.getString("password_required"), ""));
+                                messageSource.getString("password_required"), ""));
                 return null;
             }
             if (userPassword2.equals("")) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        messageSource.getString("reconfirm_user_password"), ""));
+                                messageSource.getString("reconfirm_user_password"), ""));
                 return null;
             }
             if (!userPassword1.equals(userPassword2)) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        messageSource.getString("user_password_reconfirm_not_match"), ""));
+                                messageSource.getString("user_password_reconfirm_not_match"), ""));
                 return null;
 
             }
@@ -142,26 +141,27 @@ public class SignOnBean {
             ChangePassword cp = new ChangePassword();
             sm.setChangePassword(cp);
             cp.setNewPwd(userPassword1.toUpperCase());
-            NewKeyword nk = new NewKeyword();
-            cp.setNewKeyword(nk);
+            cp.setNewKeyword("ABCDEF");
             JAXBContext jc = JAXBContext.newInstance("com.galileoindonesia.schema.session");
             Marshaller m = jc.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             StringWriter sw = new StringWriter();
             m.marshal(scp, sw);
             String strRequest = sw.toString();
+            Logger.getLogger(SignOnBean.class.getName()).log(Level.INFO, strRequest);
             String identity = XsIdentity.identity(signOn,
                     visit.getUsers().getPccId().getPccPcc());
-            xmlSelect.syncSubmit(identity,
-                    strRequest, XsFilter.ALL, visit.getSutaKey());
+            Logger.getLogger(SignOnBean.class.getName()).log(Level.INFO,
+                    xmlSelect.syncSubmit(identity,
+                            strRequest, XsFilter.ALL, visit.getSutaKey()));            
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    ex.getMessage(), ""));
+                            ex.getMessage(), ""));
             Logger.getLogger(SignOnBean.class.getName()).log(Level.SEVERE, null, ex);
             result = "redirect:secure/change_signon_password";
         }
-        
+
         return result;
     }
 
