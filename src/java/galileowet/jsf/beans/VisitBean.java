@@ -135,7 +135,7 @@ public class VisitBean {
         try {
             this.terminalText = "";
             this.terminalText = es.submit(execTermCommand).get(60, TimeUnit.SECONDS);
-        } catch (InterruptedException | ExecutionException | TimeoutException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(VisitBean.class.getName()).log(Level.SEVERE, "GWET0001:" + ex.getMessage(), ex);
             this.terminalText = ex.getMessage();
         }

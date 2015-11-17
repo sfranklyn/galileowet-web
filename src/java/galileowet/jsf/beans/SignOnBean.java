@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import galileowet.ejb.service.XmlSelect;
 import galileowet.ejb.service.XsFilter;
 import galileowet.ejb.service.XsIdentity;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,6 +21,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import org.primefaces.optimus.config.Scope;
 import org.primefaces.optimus.config.annotations.Controller;
 
@@ -33,7 +36,7 @@ public class SignOnBean {
     private static final String MESSAGES = "webmessages";
     private static final String ERR = "ERR:";
     private ResourceBundle messageSource;
-    private String signOn = " ";
+    private String signOn = "";
     private String userPassword1 = "";
     private String userPassword2 = "";
     private String password = "";
@@ -106,6 +109,9 @@ public class SignOnBean {
             visit.setXs(null);
             return null;
         }
+        if (visit.getTerminalText().startsWith("]STD")) {
+            return "redirect:secure/change_signon_password";
+        }
         visit.setIsSignOn(Boolean.TRUE);
         return null;
     }
@@ -144,6 +150,7 @@ public class SignOnBean {
             cp.setNewKeyword("ABCDEF");
             JAXBContext jc = JAXBContext.newInstance("com.galileoindonesia.schema.session");
             Marshaller m = jc.createMarshaller();
+            Unmarshaller bookingUnmarshaller = jc.createUnmarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             StringWriter sw = new StringWriter();
             m.marshal(scp, sw);
@@ -151,15 +158,36 @@ public class SignOnBean {
             Logger.getLogger(SignOnBean.class.getName()).log(Level.INFO, strRequest);
             String identity = XsIdentity.identity(signOn,
                     visit.getUsers().getPccId().getPccPcc());
-            Logger.getLogger(SignOnBean.class.getName()).log(Level.INFO,
-                    xmlSelect.syncSubmit(identity,
-                            strRequest, XsFilter.ALL, visit.getSutaKey()));            
+            String res = xmlSelect.syncSubmit(identity, strRequest, XsFilter.ALL, visit.getSutaKey());
+            if (res.contains("SIGN-ON COMPLETE"))
+                visit.setIsSignOn(Boolean.TRUE);
+            else {
+
+                visit.setIsSignOn(Boolean.FALSE);
+//                xmlSelect.endSession(Integer.MIN_VALUE + 1, visit.getSutaKey());
+//                xs.destroySuta(sutaKey);
+//                xs = null;
+
+                int start = res.indexOf("<Text>");
+                int end = res.indexOf("</Text>");
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                res.substring(start+6, end), ""));
+                return null;
+            }
+            Logger.getLogger(SignOnBean.class.getName()).log(Level.INFO, res);
+//            Logger.getLogger(SignOnBean.class.getName()).log(Level.INFO,
+//                    xmlSelect.syncSubmit(identity,
+//                            strRequest, XsFilter.ALL, visit.getSutaKey()));
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             ex.getMessage(), ""));
             Logger.getLogger(SignOnBean.class.getName()).log(Level.SEVERE, null, ex);
             result = "redirect:secure/change_signon_password";
+        } finally {
+//            xmlSelect.endSession(Integer.MIN_VALUE + 1, visit.getSutaKey());
+//            xmlSelect.destroySuta(visit.getSutaKey());
         }
 
         return result;
